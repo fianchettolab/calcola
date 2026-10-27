@@ -50,6 +50,7 @@ info?["CFBundleShortVersionString"]        // Calcola's own version
 | Calcola | StockfishEmbedded | Net |
 |---|---|---|
 | 0.1.0 | 1.14.0 (`4453510`) | `nn-c9e480e92425.nnue` |
+| 0.1.1 | 1.14.0 (`4453510`) | `nn-c9e480e92425.nnue` |
 
 Apple silicon only: iOS 26 (device and simulator) and macOS 26, arm64, as upstream.
 
