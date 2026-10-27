@@ -23,7 +23,13 @@ swift test
 
 zip="build/SFEngine.xcframework.zip"
 rm -f "$zip"
-(cd build && ditto -c -k --keepParent SFEngine.xcframework SFEngine.xcframework.zip)
+# Without resource forks and extended attributes: ditto would store them as ._ files,
+# which Xcode then finds in the framework's headers.
+(cd build && ditto -c -k --norsrc --noextattr --keepParent SFEngine.xcframework SFEngine.xcframework.zip)
+if unzip -l "$zip" | grep -q '/\._'; then
+    echo "$zip contains ._ metadata files; not releasing it." >&2
+    exit 1
+fi
 checksum="$(swift package compute-checksum "$zip")"
 
 upstream_version="$(sed -n 's/^upstream_version="\(.*\)"/\1/p' build-xcframework.sh)"
